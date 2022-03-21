@@ -1,9 +1,0 @@
-{
-"type": "FeatureCollection",
-"features": [
-{ "type": "Feature", "properties": { "Id": "0", "Panjang": "4.251 km" }, "geometry": { "type": "LineString", "coordinates": [ [ 98.745656, 2.753993 ], [ 98.772590, 2.781304 ] ] } }
-,
-{ "type": "Feature", "properties": { "Id": "0", "Panjang": "2.599 km" }, "geometry": { "type": "LineString", "coordinates": [ [ 98.772590, 2.781304 ], [ 98.789057, 2.798000 ] ] } }
-
-]
-}
