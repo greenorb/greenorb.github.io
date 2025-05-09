@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id=id">
+<meta charset='utf-8' />
+<p style="text-align: justify;">Surat Keputusan Menteri LHK Nomor:
+    <strong>SK.533/MENLHK/SETJEN/PLA.2/5/2023</strong> tanggal 25 Mei 2023 tentang Perubahan
+    Peruntukan Kawasan Hutan menjadi Bukan Kawasan Hutan Seluas ±
+    2.340 Ha (Dua Ribu Tiga Ratus Empat Puluh Hektare), Perubahan
+    Fungsi Pokok Kawasan Hutan Seluas ± 20.272 Ha(Dua Puluh Ribu
+    Dua Ratus Tujuh Puluh Dua Hektare) dan Perubahan dalam Fungsi
+    Pokok Kawasan Hutan Seluas ± 221 Ha (Dua Ratus Dua Puluh Satu
+    Hektare) dalam rangka Review Rencana Tata Ruang Wilayah Provinsi
+    Bengkulu</p>
+<head>
+    <title>Kawasan Hutan Bengkulu</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Geocode</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div element that contains the map. */
+      #map {
+        height: 500px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 1;
+        padding: 0;
+      }
+      #info-box {
+        background-color: white;
+        border: 1px solid black;
+        bottom: 30px;
+        height: 20px;
+        padding: 10px;
+        left: 30px;
+      }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="info-box">Sentuh Warna Peta Untuk Fungsi Kawasan</div>
+<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 9,
+          center: {lat: -3.757, lng: 102.296}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        // Load GeoJSON.
+        map.data.loadGeoJson('https://raw.githubusercontent.com/greenorb/greenorb.github.io/master/009.geojson');
+
+        // Set the stroke width, and fill color for each polygon
+        map.data.setStyle(function(feature) {
+        var Fungsi = feature.getProperty('Fungsi');
+        var color = "black";
+
+        if (Fungsi == "CA") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "HL") {
+        color = "green";
+         }
+        if (Fungsi == "HP") {
+        color = "yellow";
+         }
+        if (Fungsi == "HPK") {
+        color = "deeppink";
+         }
+        if (Fungsi == "HPT") {
+        color = "lime";
+         }
+        if (Fungsi == "HSA") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "SM") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "Tahura") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "TB") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "TN") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "TNL") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "TWA") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "TWAL") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "KSA") {
+        color = "darkviolet";
+         }
+        if (Fungsi == "KSAL") {
+        color = "darkviolet";
+         }
+         return {
+         fillColor: color,
+         strokeWeight: 1
+        }
+       });
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+
+        // Set mouseover event for each feature.
+        map.data.addListener('click', function(event) {
+          document.getElementById('info-box').textContent =
+              event.feature.getProperty('Fungsi');
+        });
+      }
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            map.setZoom(16);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Gunakan satu spasi sebelum input lat/long: ' + status);
+          }
+        });
+      }
+    </script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5rWgzyIHxmMV_NqxxSVnf-kWt-fUtzzI&callback=initMap">
+</script>
+<div id="floating-panel">
+    <label for="address"></label><input id="address" type="text" value="-3.8128, 102.2878">
+    <input id="submit" type="button" value="Geocode">
+</div>
+</body>
+</html>
